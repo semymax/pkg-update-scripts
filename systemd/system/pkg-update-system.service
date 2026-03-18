@@ -1,0 +1,12 @@
+[Unit]
+Description=Auto update for system wide install packages
+After=network-online.target
+Wants=network-online.target
+OnFailure=pkg-update-system-error.service
+
+[Service]
+Type=oneshot
+ExecStart=__SCRIPTS_SYSTEM_DIR__/update-all-system.sh
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,10 @@
+[Unit]
+Description=Auto update for user installed packages
+OnFailure=pkg-update-user-error.service
+
+[Service]
+Type=oneshot
+ExecStart=__SCRIPTS_USER_DIR__/update-all-user.sh
+
+[Install]
+WantedBy=default.target
