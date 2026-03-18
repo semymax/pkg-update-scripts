@@ -117,7 +117,7 @@ if [ "$failed_deps" -gt 0 ]; then
     for dep in "${deps_not_found[@]}"; do
         echo "  - ${dep}"
     done
-    echo "Refer to https://github.com/myuser/myrepo#Requirements"
+    echo "Refer to https://github.com/semymax/pkg-update-scripts#requirements"
     exit "$failed_deps"
 else
     echo "[INFO] All good with dependencies"
