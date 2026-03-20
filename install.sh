@@ -51,13 +51,13 @@ not_found=()
 # Project integrity
 echo "--- Checking if files exist ---"
 check_integrity() {
-    # $1 -> type; $2-> file
+    # $1: type; $2: file
     if [ -f "$2" ]; then
         echo "  $2 - file found (ok)"
         if [ "$1" == "script" ]; then
             scripts_found+=("$2")
         fi
-        # ((ok++))
+        # ok=$((ok + 1)) # no use for now
     else
         echo "  $2 - expected file not found (error)"
         not_found+=("$2")
@@ -84,7 +84,7 @@ for system_unit in "${system_units[@]}"; do
 done
 
 if [[ "$fail" -gt 0 ]]; then
-    echo "=====  ERROR  ====="
+    echo "=====  INTEGRITY ERROR  ====="
     echo "Expected files not found:"
     for file in "${not_found[@]}"; do
         echo "$file"
@@ -107,7 +107,7 @@ for cmd in "${deps[@]}"; do
         deps_not_found+=("$cmd")
         failed_deps=$((failed_deps + 1))
     else
-        echo "  - ${cmd} found"
+        echo "  - found ${cmd}"
     fi
 done
 

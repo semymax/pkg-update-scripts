@@ -3,8 +3,8 @@ Description=Timer for %n service
 
 [Timer]
 OnBootSec=10min
-OnUnitActiveSec=1day
-RandomizedDelaySec=1h
+OnUnitActiveSec=7h
+RandomizedDelaySec=30min
 Persistent=true
 
 [Install]

@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
-log_file="${XDG_STATE_HOME:-$HOME/.local/state}/pkg-automation/$(date +%Y-%m-%d).log"
+if [[ "$EUID" -eq 0 ]]; then
+    # convention for system level logging
+    log_file="/var/log/pkg-automation/$(date +%Y-%m-%d).log"
+else
+    log_file="${XDG_STATE_HOME:-$HOME/.local/state}/pkg-automation/$(date +%Y-%m-%d).log"
+fi
 mkdir -p "$(dirname "$log_file")"
 
 _logger() {

@@ -12,4 +12,4 @@ log_info "Checking if ir is installed"
 require_cmd ir
 
 run_cmd ir upgrade
-log_info "=== Install-Release: finished ==="
+log_info "=== install-release: finished ==="
