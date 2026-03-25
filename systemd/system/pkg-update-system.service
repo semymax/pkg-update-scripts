@@ -6,6 +6,7 @@ OnFailure=pkg-update-system-error.service
 
 [Service]
 Type=oneshot
+Environment=HOME=__USER_HOME__
 ExecStart=__SCRIPTS_SYSTEM_DIR__/update-all-system.sh
 
 [Install]

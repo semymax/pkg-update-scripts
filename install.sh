@@ -140,6 +140,7 @@ done
 for unit in "${system_units[@]}"; do
     dest="/etc/systemd/system/${unit}"
     sudo cp "${sdunits_system_dir}/${unit}" "$dest"
+    sudo sed -i "s|__USER_HOME__|${HOME}|g" "$dest"
     sudo sed -i "s|__SCRIPTS_SYSTEM_DIR__|${scripts_system_dir}|g" "$dest"
     log_info "Installed ${unit} -> ${dest}"
 done

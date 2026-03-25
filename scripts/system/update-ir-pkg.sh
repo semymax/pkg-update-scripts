@@ -11,5 +11,5 @@ log_info "=== install-release (packages): updating apps ==="
 log_info "Checking if ir is installed"
 require_cmd ir
 
-run_cmd ir upgrade --pkg
+run_cmd ir upgrade --pkg -y
 log_info "=== Install-Release (packages): finished ==="
