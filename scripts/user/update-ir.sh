@@ -11,5 +11,5 @@ log_info "=== install-release: updating apps ==="
 log_info "Checking if ir is installed"
 require_cmd ir
 
-run_cmd ir upgrade
+run_cmd ir upgrade -y
 log_info "=== install-release: finished ==="
