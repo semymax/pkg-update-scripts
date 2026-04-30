@@ -5,7 +5,8 @@ if [[ "$EUID" -eq 0 ]]; then
 else
     log_file="${XDG_STATE_HOME:-$HOME/.local/state}/pkg-automation/$(date +%Y-%m-%d).log"
 fi
-mkdir -p "$(dirname "$log_file")"
+log_dir=$(dirname "$log_file")
+mkdir -p "$log_dir"
 
 _logger() {
     echo "($(date +%H:%M:%S)) [$1] - $2" | tee -a "$log_file" 
@@ -38,5 +39,25 @@ run_cmd() {
         status=$?
         log_error "Command failed (exit code: $status)"
         return "$status"
+    fi
+}
+
+# remove log files older than a specified number of days
+cleanup_old_logs() {
+    local max_days="${1:-30}" # Defaults to 30 days
+
+    log_info "Removing log files older than ${max_days} days from ${log_dir}"
+
+    local deleted_count=0
+    while IFS= read -r -d '' old_log; do
+        log_info "  deleting: $(basename "$old_log")"
+        rm -f "$old_log"
+        deleted_count=$((deleted_count + 1))
+    done < <(find "$log_dir" -maxdepth 1 -name '*.log' -type f -mtime "+${max_days}" -print0)
+
+    if [ "$deleted_count" -eq 0 ]; then
+        log_info "  no old logs to remove"
+    else
+        log_info "  removed ${deleted_count} old log(s)"
     fi
 }

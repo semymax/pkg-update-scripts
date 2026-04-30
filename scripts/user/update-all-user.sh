@@ -35,6 +35,8 @@ log_info "=== Complete update (user): starting ==="
 run_module "update-appman.sh" "appman"
 run_module "update-ir.sh" "install-release"
 
+cleanup_old_logs 30
+
 log_info "=== Summary: $ok ok, $fail failed ==="
 
 # exit code reflects if there was an error running any module

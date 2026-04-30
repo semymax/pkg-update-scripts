@@ -169,6 +169,8 @@ System-level runs are also captured by journald and can be queried with:
 journalctl -u pkg-update-system.service
 ```
 
+Log files older than 30 days (by default) will be deleted when the update scripts run.
+
 ---
 
 ## Planned improvements
@@ -186,8 +188,8 @@ system ever needs to serve multiple users or requires apps installed in `/opt`, 
 (system mode) can be added to the system service with a single line in
 `update-all-system.sh`. The architecture already anticipates this.
 
-**Log rotation** — Logs accumulate indefinitely. A cleanup step removing entries older
-than 30 days should be added to the orchestrators or handled by a separate timer.
+~~**Log rotation** — Logs accumulate indefinitely. A cleanup step removing entries older
+than 30 days should be added to the orchestrators or handled by a separate timer.~~ (implemented)
 
 **ir state in Git** — install-release stores its state in
 `~/.local/config/install_release/`. Committing this file makes the installed tool list

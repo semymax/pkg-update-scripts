@@ -35,6 +35,8 @@ log_info "=== Complete update (system): starting ==="
 run_module "update-deb-get.sh" "deb-get";
 run_module "update-ir-pkg.sh" "ir packages"
 
+cleanup_old_logs 30
+
 log_info "=== Summary: $ok ok, $fail failed ==="
 
 # exit code reflects if there was an error running any module
