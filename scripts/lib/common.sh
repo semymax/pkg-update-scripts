@@ -50,14 +50,14 @@ cleanup_old_logs() {
 
     local deleted_count=0
     while IFS= read -r -d '' old_log; do
-        log_info "  deleting: $(basename "$old_log")"
+        log_info "Deleting: $(basename "$old_log")"
         rm -f "$old_log"
         deleted_count=$((deleted_count + 1))
     done < <(find "$log_dir" -maxdepth 1 -name '*.log' -type f -mtime "+${max_days}" -print0)
 
     if [ "$deleted_count" -eq 0 ]; then
-        log_info "  no old logs to remove"
+        log_info "No old logs to remove"
     else
-        log_info "  removed ${deleted_count} old log(s)"
+        log_info "Removed ${deleted_count} old log(s)"
     fi
 }
